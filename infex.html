@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Орден Золотого Дракона</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f4f1de;
+            overflow-x: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><rect fill="%23654321" width="1200" height="400"/><path fill="%238B4513" d="M0,300 Q300,250 600,300 T1200,300 L1200,400 L0,400 Z"/></svg>');
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        
+        .dragon-emblem {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 20px #ffd700);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px #ffd700); }
+            to { filter: drop-shadow(0 0 30px #ffed4e); }
+        }
+        
+        .main-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 4rem;
+            color: #ffd700;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.8);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            color: #e6ddd4;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+        
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(145deg, #8b4513, #654321);
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 1rem 2rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .nav-btn:hover {
+            background: linear-gradient(145deg, #ffd700, #ffed4e);
+            color: #654321;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
+        }
+        
+        .content-section {
+            display: none;
+            min-height: 100vh;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            font-family: 'Cinzel Decorative', serif;
+            font-size: 3rem;
+            color: #ffd700;
+            text-align: center;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-card {
+            background: linear-gradient(145deg, rgba(139, 69, 19, 0.8), rgba(101, 67, 33, 0.8));
+            border: 2px solid #ffd700;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .hero-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+        
+        .hero-name {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .hero-title {
+            font-size: 1.2rem;
+            color: #e6ddd4;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+        
+        .hero-description {
+            line-height: 1.6;
+            color: #f4f1de;
+        }
+        
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .culture-item {
+            background: rgba(139, 69, 19, 0.6);
+            border-left: 4px solid #ffd700;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+        
+        .culture-item h3 {
+            color: #ffd700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .map-container {
+            background: rgba(139, 69, 19, 0.8);
+            border: 3px solid #ffd700;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-svg {
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #228B22, #32CD32, #90EE90);
+        }
+        
+        .location {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .location:hover {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+        
+        .location-info {
+            background: rgba(0,0,0,0.9);
+            color: #ffd700;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid #ffd700;
+            display: none;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            background: rgba(139, 69, 19, 0.9);
+            border: 2px solid #ffd700;
+            color: #ffd700;
+            padding: 0.8rem 1.5rem;
+            font-family: 'Cinzel', serif;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-btn:hover {
+            background: #ffd700;
+            color: #654321;
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.5rem;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 250px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="home" class="header">
+        <svg class="dragon-emblem" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ffd700"/>
+                    <stop offset="100%" style="stop-color:#ffed4e"/>
+                </linearGradient>
+            </defs>
+            <path d="M50 10 L60 25 L75 20 L65 35 L80 45 L60 45 L50 60 L40 45 L20 45 L35 35 L25 20 L40 25 Z" fill="url(#goldGradient)" stroke="#8b4513" stroke-width="2"/>
+            <circle cx="50" cy="35" r="8" fill="#8b4513"/>
+            <path d="M45 32 Q50 28 55 32" stroke="#ffd700" stroke-width="2" fill="none"/>
+            <path d="M30 50 Q50 65 70 50" stroke="#ffd700" stroke-width="3" fill="none"/>
+        </svg>
+        
+        <h1 class="main-title">Орден Золотого Дракона</h1>
+        <p class="subtitle">Хроники доблестных рыцарей средневековья</p>
+        
+        <div class="nav-menu">
+            <button class="nav-btn" onclick="showSection('heroes')">Подвиги Рыцарей</button>
+            <button class="nav-btn" onclick="showSection('culture')">Культура</button>
+            <button class="nav-btn" onclick="showSection('map')">Карта Земель</button>
+        </div>
+    </div>
+
+    <button class="back-btn" onclick="showHome()" style="display: none;" id="backBtn">⚔️ На главную</button>
+
+    <div id="heroes" class="content-section">
+        <h2 class="section-title">Легендарные Рыцари</h2>
+        
+        <div class="hero-grid">
+            <div class="hero-card">
+                <div class="hero-name">Сэр Артур Драконобой</div>
+                <div class="hero-title">Защитник Золотых Земель</div>
+                <div class="hero-description">
+                    Великий рыцарь, победивший древнего дракона Пламенное Сердце. Его золотые доспехи были выкованы из чешуи поверженного зверя. Основал орден и защищал королевство более 30 лет.
+                </div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-name">Леди Изабелла Стальная</div>
+                <div class="hero-title">Хранительница Древних Знаний</div>
+                <div class="hero-description">
+                    Первая женщина-рыцарь ордена. Мастер фехтования и знаток древних рун. Спасла королевскую библиотеку от пожара и сохранила тысячи свитков с магическими знаниями.
+                </div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-name">Сэр Гарет Громовержец</div>
+                <div class="hero-title">Повелитель Молний</div>
+                <div class="hero-description">
+                    Рыцарь-маг, владеющий силой грозы. Его меч Молниеносец способен призывать молнии с небес. Защитил замок от осады армии орков, призвав великую бурю.
+                </div>
+            </div>
+            
+            <div class="hero-card">
+                <div class="hero-name">Сэр Родерик Львиное Сердце</div>
+                <div class="hero-title">Командир Золотой Гвардии</div>
+                <div class="hero-description">
+                    Бесстрашный воин и тактик. Возглавлял элитную гвардию ордена. Никогда не отступал в бою и спас жизни сотен мирных жителей во время Великой Войны Теней.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="culture" class="content-section">
+        <h2 class="section-title">Культура Рыцарства</h2>
+        
+        <div class="culture-grid">
+            <div class="culture-item">
+                <h3>🛡️ Кодекс Чести</h3>
+                <p>Рыцари ордена следуют строгому кодексу: защищать слабых, говорить правду, быть верным своему слову и никогда не отступать перед лицом зла. Честь дороже жизни.</p>
+            </div>
+            
+            <div class="culture-item">
+                <h3>⚔️ Боевые Традиции</h3>
+                <p>Каждый рыцарь проходит 7-летнее обучение: от пажа до оруженосца, затем посвящение в рыцари. Мастерство владения мечом, копьем и щитом - основа подготовки.</p>
+            </div>
+            
+            <div class="culture-item">
+                <h3>🏰 Замковая Жизнь</h3>
+                <p>Замок - центр рыцарской жизни. Здесь проходят турниры, пиры, советы и обучение. Большой зал украшен гербами всех рыцарей ордена и трофеями их побед.</p>
+            </div>
+            
+            <div class="culture-item">
+                <h3>📜 Древние Ритуалы</h3>
+                <p>Посвящение в рыцари происходит на рассвете в день полнолуния. Кандидат проводит ночь в молитве, а затем получает благословение и золотые шпоры.</p>
+            </div>
+            
+            <div class="culture-item">
+                <h3>🐉 Легенды о Драконах</h3>
+                <p>Драконы - древние хранители мудрости. Не все из них враги. Золотые драконы считаются покровителями ордена и дарят свою силу достойным рыцарям.</p>
+            </div>
+            
+            <div class="culture-item">
+                <h3>🎭 Праздники и Турниры</h3>
+                <p>Весенний турнир, Праздник Урожая и День Основания ордена - главные события года. Рыцари демонстрируют мастерство, а народ празднует вместе с ними.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="map" class="content-section">
+        <h2 class="section-title">Карта Королевства</h2>
+        
+        <div class="map-container">
+            <svg class="map-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                <!-- Фон карты -->
+                <rect width="800" height="500" fill="url(#mapGradient)"/>
+                
+                <defs>
+                    <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#90EE90"/>
+                        <stop offset="50%" style="stop-color:#228B22"/>
+                        <stop offset="100%" style="stop-color:#006400"/>
+                    </linearGradient>
+                    <linearGradient id="castleGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#D2691E"/>
+                        <stop offset="100%" style="stop-color:#8B4513"/>
+                    </linearGradient>
+                </defs>
+                
+                <!-- Горы -->
+                <path d="M0,200 L100,100 L200,150 L300,80 L400,120 L500,60 L600,100 L700,80 L800,120 L800,500 L0,500 Z" fill="#696969" opacity="0.7"/>
+                
+                <!-- Река -->
+                <path d="M150,300 Q300,250 450,300 Q600,350 750,300" stroke="#4169E1" stroke-width="8" fill="none" opacity="0.8"/>
+                
+                <!-- Замок Золотого Дракона -->
+                <g class="location" onclick="showLocationInfo('castle')">
+                    <rect x="350" y="180" width="100" height="80" fill="url(#castleGradient)" stroke="#ffd700" stroke-width="2"/>
+                    <polygon points="350,180 400,140 450,180" fill="#8B4513"/>
+                    <rect x="370" y="200" width="15" height="40" fill="#654321"/>
+                    <rect x="405" y="200" width="15" height="40" fill="#654321"/>
+                    <circle cx="400" cy="160" r="8" fill="#ffd700"/>
+                    <text x="400" y="280" text-anchor="middle" fill="#ffd700" font-family="Cinzel" font-size="14" font-weight="bold">Замок Золотого Дракона</text>
+                </g>
+                
+                <!-- Деревня Светлый Дол -->
+                <g class="location" onclick="showLocationInfo('village1')">
+                    <rect x="200" y="320" width="20" height="15" fill="#8B4513"/>
+                    <polygon points="200,320 210,310 220,320" fill="#654321"/>
+                    <rect x="230" y="325" width="18" height="12" fill="#8B4513"/>
+                    <polygon points="230,325 239,317 248,325" fill="#654321"/>
+                    <rect x="250" y="318" width="22" height="18" fill="#8B4513"/>
+                    <polygon points="250,318 261,308 272,318" fill="#654321"/>
+                    <text x="235" y="355" text-anchor="middle" fill="#ffd700" font-family="Cinzel" font-size="12">Светлый Дол</text>
+                </g>
+                
+                <!-- Деревня Каменный Брод -->
+                <g class="location" onclick="showLocationInfo('village2')">
+                    <rect x="550" y="280" width="20" height="15" fill="#8B4513"/>
+                    <polygon points="550,280 560,270 570,280" fill="#654321"/>
+                    <rect x="575" y="285" width="18" height="12" fill="#8B4513"/>
+                    <polygon points="575,285 584,277 593,285" fill="#654321"/>
+                    <text x="575" y="315" text-anchor="middle" fill="#ffd700" font-family="Cinzel" font-size="12">Каменный Брод</text>
+                </g>
+                
+                <!-- Лес Древних -->
+                <circle cx="150" cy="150" r="8" fill="#228B22"/>
+                <circle cx="160" cy="140" r="6" fill="#32CD32"/>
+                <circle cx="140" cy="135" r="7" fill="#228B22"/>
+                <circle cx="170" cy="160" r="5" fill="#32CD32"/>
+                <text x="155" y="185" text-anchor="middle" fill="#ffd700" font-family="Cinzel" font-size="12">Лес Древних</text>
+                
+                <!-- Драконья Пещера -->
+                <g class="location" onclick="showLocationInfo('cave')">
+                    <ellipse cx="650" cy="150" rx="25" ry="15" fill="#2F4F4F"/>
+                    <ellipse cx="650" cy="150" rx="15" ry="8" fill="#000000"/>
+                    <text x="650" y="180" text-anchor="middle" fill="#ffd700" font-family="Cinzel" font-size="12">Драконья Пещера</text>
+                </g>
+                
+                <!-- Дороги -->
+                <path d="M235,340 Q300,300 400,240" stroke="#8B4513" stroke-width="3" fill="none" opacity="0.6"/>
+                <path d="M450,240 Q500,260 575,290" stroke="#8B4513" stroke-width="3" fill="none" opacity="0.6"/>
+                <path d="M400,240 Q500,200 650,150" stroke="#8B4513" stroke-width="2" fill="none" opacity="0.6"/>
+            </svg>
+            
+            <div id="locationInfo" class="location-info">
+                <h3 id="locationTitle"></h3>
+                <p id="locationDescription"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Скрыть главную страницу
+            document.getElementById('home').style.display = 'none';
+            
+            // Скрыть все секции
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Показать выбранную секцию
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Показать кнопку "На главную"
+            document.getElementById('backBtn').style.display = 'block';
+        }
+        
+        function showHome() {
+            // Показать главную страницу
+            document.getElementById('home').style.display = 'flex';
+            
+            // Скрыть все секции
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Скрыть кнопку "На главную"
+            document.getElementById('backBtn').style.display = 'none';
+            
+            // Скрыть информацию о локации
+            document.getElementById('locationInfo').style.display = 'none';
+        }
+        
+        function showLocationInfo(location) {
+            const locationInfo = document.getElementById('locationInfo');
+            const locationTitle = document.getElementById('locationTitle');
+            const locationDescription = document.getElementById('locationDescription');
+            
+            const locations = {
+                castle: {
+                    title: '🏰 Замок Золотого Дракона',
+                    description: 'Величественная крепость ордена, построенная на высоком холме. В центральной башне хранится легендарный меч Драконобоя. Здесь живут рыцари и проходят все важные церемонии.'
+                },
+                village1: {
+                    title: '🏘️ Деревня Светлый Дол',
+                    description: 'Мирная деревня в долине, известная своими искусными кузнецами. Здесь куют лучшие мечи и доспехи для рыцарей. Население: 300 человек.'
+                },
+                village2: {
+                    title: '🌉 Деревня Каменный Брод',
+                    description: 'Торговая деревня у речной переправы. Через неё проходят все торговые пути. Славится своими лошадьми и умелыми лучниками.'
+                },
+                cave: {
+                    title: '🐉 Драконья Пещера',
+                    description: 'Древняя пещера в горах, где когда-то жил дракон Пламенное Сердце. Теперь здесь покоятся его сокровища и проходят испытания для будущих рыцарей.'
+                }
+            };
+            
+            if (locations[location]) {
+                locationTitle.textContent = locations[location].title;
+                locationDescription.textContent = locations[location].description;
+                locationInfo.style.display = 'block';
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9831547682f6bbb1',t:'MTc1ODUzOTE1NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
